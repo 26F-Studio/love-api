@@ -212,23 +212,8 @@ return {
                     arguments = {
                         {
                             type = 'number',
-                            name = 'e1_1',
-                            description = 'The first column of the first row of the matrix.',
-                        },
-                        {
-                            type = 'number',
-                            name = 'e1_2',
-                            description = 'The second column of the first row of the matrix.',
-                        },
-                        {
-                            type = 'number',
-                            name = '...',
-                            description = 'Additional matrix elements.',
-                        },
-                        {
-                            type = 'number',
-                            name = 'e4_4',
-                            description = 'The fourth column of the fourth row of the matrix.',
+                            name = 'e1_1, e1_2, e1_3, e1_4, e2_1, e2_2, e2_3, e2_4, e3_1, e3_2, e3_3, e3_4, e4_1, e4_2, e4_3, e4_4',
+                            description = 'ei_j: The i-th column of the j-th row of the matrix.',
                         },
                     },
                     returns = {
@@ -248,23 +233,8 @@ return {
                         },
                         {
                             type = 'number',
-                            name = 'e1_1',
-                            description = 'The first column of the first row of the matrix.',
-                        },
-                        {
-                            type = 'number',
-                            name = 'e1_2',
-                            description = 'The second column of the first row or the first column of the second row of the matrix, depending on the specified layout.',
-                        },
-                        {
-                            type = 'number',
-                            name = '...',
-                            description = 'Additional matrix elements.',
-                        },
-                        {
-                            type = 'number',
-                            name = 'e4_4',
-                            description = 'The fourth column of the fourth row of the matrix.',
+                            name = 'e1_1, e1_2, e1_3, e1_4, e2_1, e2_2, e2_3, e2_4, e3_1, e3_2, e3_3, e3_4, e4_1, e4_2, e4_3, e4_4',
+                            description = 'ei_j: The i-th column of the j-th row of the matrix.',
                         },
                     },
                     returns = {
