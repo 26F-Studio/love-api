@@ -112,8 +112,8 @@ return {
                     description = 'Restarts the game without relaunching the executable. This cleanly shuts down the main Lua state instance and creates a brand new one.',
                     arguments = {
                         {
-                            type = 'string',
-                            name = '\'restart\'',
+                            type = '\'restart\'',
+                            name = 'restart',
                             description = 'Tells the default love.run to exit and restart the game without relaunching the executable.',
                         },
                     },
