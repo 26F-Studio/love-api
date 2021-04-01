@@ -668,21 +668,6 @@ return {
                         },
                     },
                 },
-                {
-                    description = 'Key repeat needs to be enabled with love.keyboard.setKeyRepeat for repeat keypress events to be received.',
-                    arguments = {
-                        {
-                            type = 'KeyConstant',
-                            name = 'key',
-                            description = 'Character of the key pressed.',
-                        },
-                        {
-                            type = 'boolean',
-                            name = 'isrepeat',
-                            description = 'Whether this keypress event is a repeat. The delay between key repeats depends on the user\'s system settings.',
-                        },
-                    },
-                },
             },
         },
         {
