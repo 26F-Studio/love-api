@@ -26,6 +26,21 @@ return {
             },
         },
         {
+            name = 'decode',
+            description = 'Decodes the audio and returns a SoundData object containing the decoded audio data.',
+            variants = {
+                {
+                    returns = {
+                        {
+                            type = 'SoundData',
+                            name = 'soundData',
+                            description = 'Decoded audio data.'
+                        },
+                    },
+                },
+            },
+        },
+        {
             name = 'getBitDepth',
             description = 'Returns the number of bits per sample.',
             variants = {
@@ -80,6 +95,21 @@ return {
                             type = 'number',
                             name = 'rate',
                             description = 'Number of samples per second.',
+                        },
+                    },
+                },
+            },
+        },
+        {
+            name = 'seek',
+            description = 'Sets the currently playing position of the Decoder.',
+            variants = {
+                {
+                    arguments = {
+                        {
+                            type = 'number',
+                            name = 'offset',
+                            description = 'The position to seek to, in seconds.'
                         },
                     },
                 },

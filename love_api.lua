@@ -1,7 +1,7 @@
 local path = (...):match('(.-)[^%./]+$')
 
 return {
-    version = '11.3',
+    version = '11.4',
     functions = {
         {
             name = 'getVersion',
@@ -44,6 +44,54 @@ return {
                             type = 'boolean',
                             name = 'enabled',
                             description = 'Whether deprecation output is enabled.',
+                        },
+                    },
+                },
+            },
+        },
+        {
+            name = 'isVersionCompatible',
+            description = 'Gets whether the given version is compatible with the current running version of LÖVE.',
+            variants = {
+                {
+                    arguments = {
+                        {
+                            type = 'string',
+                            name = 'version',
+                            description = 'The version to check (for example \'11.3\' or \'0.10.2\').',
+                        },
+                    },
+                    returns = {
+                        {
+                            type = 'boolean',
+                            name = 'compatible',
+                            description = 'Whether the given version is compatible with the current running version of LÖVE.',
+                        },
+                    },
+                },
+                {
+                    arguments = {
+                        {
+                            type = 'number',
+                            name = 'major',
+                            description = 'The major version to check (for example 11 for 11.3 or 0 for 0.10.2).',
+                        },
+                        {
+                            type = 'number',
+                            name = 'minor',
+                            description = 'The minor version to check (for example 3 for 11.3 or 10 for 0.10.2).',
+                        },
+                        {
+                            type = 'number',
+                            name = 'revision',
+                            description = 'The revision of version to check (for example 0 for 11.3 or 2 for 0.10.2).',
+                        },
+                    },
+                    returns = {
+                        {
+                            type = 'boolean',
+                            name = 'compatible',
+                            description = 'Whether the given version is compatible with the current running version of LÖVE.',
                         },
                     },
                 },

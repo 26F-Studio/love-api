@@ -878,7 +878,7 @@ return {
         },
         {
             name = 'flushBatch',
-            description = 'Immediately renders any pending automatically batched draws.\n\nLÖVE will call this function internally as needed when most state is changed, so it is not necessary to manually call it.\n\nThe current batch will be automatically flushed by color), as well as Shader:send and methods on Textures which change their state. Using a different Image in consecutive love.graphics.draw calls will also flush the current batch.\n\nSpriteBatches, ParticleSystems, Meshes, and Text objects do their own batching and do not affect automatic batching of other draws, aside from flushing the current batch when they\'re drawn.',
+            description = 'Immediately renders any pending automatically batched draws.\n\nLÖVE will call this function internally as needed when most state is changed, so it is not necessary to manually call it.\n\nThe current batch will be automatically flushed by love.graphics state changes (except for the transform stack and the current color), as well as Shader:send and methods on Textures which change their state. Using a different Image in consecutive love.graphics.draw calls will also flush the current batch.\n\nSpriteBatches, ParticleSystems, Meshes, and Text objects do their own batching and do not affect automatic batching of other draws, aside from flushing the current batch when they\'re drawn.',
             variants = {
                 {
                 },
@@ -1237,6 +1237,26 @@ return {
                             type = 'CullMode',
                             name = 'mode',
                             description = 'The Mesh face culling mode in use (whether to render everything, cull back-facing triangles, or cull front-facing triangles).',
+                        },
+                    },
+                },
+            },
+        },
+        {
+            name = 'getPixelDimenions',
+            description = 'Gets the width and height in pixels of the window.\n\nlove.graphics.getDimensions gets the dimensions of the window in units scaled by the screen\'s DPI scale factor, rather than pixels. Use getDimensions for calculations related to drawing to the screen and using the graphics coordinate system (calculating the center of the screen, for example), and getPixelDimensions only when dealing specifically with underlying pixels (pixel-related calculations in a pixel Shader, for example).',
+            variants = {
+                {
+                    returns = {
+                        {
+                            type = 'number',
+                            name = 'pixelwidth',
+                            description = 'The width of the window in pixels.',
+                        },
+                        {
+                            type = 'number',
+                            name = 'pixelheight',
+                            description = 'The height of the window in pixels.',
                         },
                     },
                 },
@@ -2143,12 +2163,78 @@ return {
                             name = 'filename',
                             description = 'The filepath to the image file.',
                         },
+                        {
+                            type = 'table',
+                            name = 'settings',
+                            description = 'A table containing the following fields:',
+                            table = {
+                                {
+                                    type = 'number',
+                                    name = 'dpiscale',
+                                    description = 'The DPI scale to use when drawing the image and calling getWidth/getHeight.',
+                                    default = '1',
+                                },
+                                {
+                                    type = 'boolean',
+                                    name = 'linear',
+                                    description = 'True to treat the image\'s pixels as linear instead of sRGB, when gamma correct rendering is enabled. Most images are authored as sRGB.',
+                                    default = 'false',
+                                },
+                                {
+                                    type = 'boolean',
+                                    name = 'mipmaps',
+                                    description = 'If true, mipmaps for the image will be automatically generated (or taken from the images\'s file if possible, if the image originated from a CompressedImageData).',
+                                    default = 'false',
+                                },
+                            },
+                        },
                     },
                     returns = {
                         {
                             type = 'Image',
                             name = 'image',
-                            description = 'An Image object which can be drawn on screen.',
+                            description = 'A new Image object which can be drawn on screen.',
+                        },
+                    },
+                },
+                {
+                    arguments = {
+                        {
+                            type = 'FileData',
+                            name = 'fileData',
+                            description = 'The FileData containing image file.',
+                        },
+                        {
+                            type = 'table',
+                            name = 'settings',
+                            description = 'A table containing the following fields:',
+                            table = {
+                                {
+                                    type = 'number',
+                                    name = 'dpiscale',
+                                    description = 'The DPI scale to use when drawing the image and calling getWidth/getHeight.',
+                                    default = '1',
+                                },
+                                {
+                                    type = 'boolean',
+                                    name = 'linear',
+                                    description = 'True to treat the image\'s pixels as linear instead of sRGB, when gamma correct rendering is enabled. Most images are authored as sRGB.',
+                                    default = 'false',
+                                },
+                                {
+                                    type = 'boolean',
+                                    name = 'mipmaps',
+                                    description = 'If true, mipmaps for the image will be automatically generated (or taken from the images\'s file if possible, if the image originated from a CompressedImageData).',
+                                    default = 'false',
+                                },
+                            },
+                        },
+                    },
+                    returns = {
+                        {
+                            type = 'Image',
+                            name = 'image',
+                            description = 'A new Image object which can be drawn on screen.',
                         },
                     },
                 },
@@ -2157,14 +2243,39 @@ return {
                         {
                             type = 'ImageData',
                             name = 'imageData',
-                            description = 'An ImageData object. The Image will use this ImageData to reload itself when love.window.setMode is called.',
+                            description = 'The ImageData containing image.',
+                        },
+                        {
+                            type = 'table',
+                            name = 'settings',
+                            description = 'A table containing the following fields:',
+                            table = {
+                                {
+                                    type = 'number',
+                                    name = 'dpiscale',
+                                    description = 'The DPI scale to use when drawing the image and calling getWidth/getHeight.',
+                                    default = '1',
+                                },
+                                {
+                                    type = 'boolean',
+                                    name = 'linear',
+                                    description = 'True to treat the image\'s pixels as linear instead of sRGB, when gamma correct rendering is enabled. Most images are authored as sRGB.',
+                                    default = 'false',
+                                },
+                                {
+                                    type = 'boolean',
+                                    name = 'mipmaps',
+                                    description = 'If true, mipmaps for the image will be automatically generated (or taken from the images\'s file if possible, if the image originated from a CompressedImageData).',
+                                    default = 'false',
+                                },
+                            },
                         },
                     },
                     returns = {
                         {
                             type = 'Image',
                             name = 'image',
-                            description = 'An Image object which can be drawn on screen.',
+                            description = 'A new Image object which can be drawn on screen.',
                         },
                     },
                 },
@@ -2175,37 +2286,27 @@ return {
                             name = 'compressedImageData',
                             description = 'A CompressedImageData object. The Image will use this CompressedImageData to reload itself when love.window.setMode is called.',
                         },
-                    },
-                    returns = {
-                        {
-                            type = 'Image',
-                            name = 'image',
-                            description = 'An Image object which can be drawn on screen.',
-                        },
-                    },
-                },
-                {
-                    arguments = {
-                        {
-                            type = 'string',
-                            name = 'filename',
-                            description = 'The filepath to the image file (or a FileData or ImageData or CompressedImageData object).',
-                        },
                         {
                             type = 'table',
-                            name = 'flags',
+                            name = 'settings',
                             description = 'A table containing the following fields:',
                             table = {
                                 {
+                                    type = 'number',
+                                    name = 'dpiscale',
+                                    description = 'The DPI scale to use when drawing the image and calling getWidth/getHeight.',
+                                    default = '1',
+                                },
+                                {
                                     type = 'boolean',
                                     name = 'linear',
-                                    description = 'True if the image\'s pixels should be interpreted as being linear RGB rather than sRGB-encoded, if gamma-correct rendering is enabled. Has no effect otherwise.',
+                                    description = 'True to treat the image\'s pixels as linear instead of sRGB, when gamma correct rendering is enabled. Most images are authored as sRGB.',
                                     default = 'false',
                                 },
                                 {
-                                    type = 'boolean or table',
+                                    type = 'boolean',
                                     name = 'mipmaps',
-                                    description = 'If true, mipmaps for the image will be automatically generated (or taken from the images\'s file if possible, if the image originated from a CompressedImageData). If this value is a table, it should contain a list of other filenames of images of the same format that have progressively half-sized dimensions, all the way down to 1x1. Those images will be used as this Image\'s mipmap levels.',
+                                    description = 'If true, mipmaps for the image will be automatically generated (or taken from the images\'s file if possible, if the image originated from a CompressedImageData).',
                                     default = 'false',
                                 },
                             },
@@ -4082,8 +4183,13 @@ return {
                     },
                 },
                 {
-                },
-                {
+                    arguments = {
+                        {
+                            type = 'table',
+                            name = 'rgba',
+                            description = 'A numerical indexed table with the red, green, blue and alpha values as numbers. The alpha is optional and defaults to 1 if it is left out.',
+                        },
+                    },
                 },
             },
         },
